@@ -19,14 +19,17 @@ export const MyThemeProvider = ({ children }) => {
 
   const toggle = () => {
     const mode = themeState.mode === "light" ? `dark` : `light`;
+    localStorage.setItem("mode", mode);
     setThemeState({ mode: mode });
   };
+
+  const localMode = localStorage.getItem("mode");
 
   return (
     <ThemeToggleContext.Provider value={{ toggle: toggle }}>
       <ThemeProvider
         theme={{
-          mode: themeState.mode,
+          mode: localMode ? localMode : themeState.mode,
         }}
       >
         <Wrapper>{children}</Wrapper>
