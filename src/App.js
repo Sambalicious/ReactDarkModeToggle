@@ -18,10 +18,6 @@ const Button = styled.button`
 function App(props) {
   const themeToggle = useTheme();
 
-  const modeToggle = () => {
-    const localmode = localStorage.getItem("mode");
-  };
-
   return (
     <div className="App">
       <header className="App-header">
