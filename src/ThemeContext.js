@@ -13,8 +13,9 @@ const ThemeToggleContext = createContext();
 export const useTheme = () => useContext(ThemeToggleContext);
 
 export const MyThemeProvider = ({ children }) => {
+  const localMode = localStorage.getItem("mode");
   const [themeState, setThemeState] = useState({
-    mode: "light",
+    mode: localMode ? localMode : "dark",
   });
 
   const toggle = () => {
@@ -23,13 +24,11 @@ export const MyThemeProvider = ({ children }) => {
     setThemeState({ mode: mode });
   };
 
-  const localMode = localStorage.getItem("mode");
-
   return (
     <ThemeToggleContext.Provider value={{ toggle: toggle }}>
       <ThemeProvider
         theme={{
-          mode: localMode ? localMode : themeState.mode,
+          mode: themeState.mode,
         }}
       >
         <Wrapper>{children}</Wrapper>
